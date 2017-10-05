@@ -3,15 +3,14 @@ package main
 import "fmt"
 
 func unique(s []string) []string {
-	pre := ""
-	result := []string{}
+	i := 0
 	for _, value := range s {
-		if pre != value {
-			result = append(result, value)
+		if s[i] != value {
+			i++
+			s[i] = value
 		}
-		pre = value
 	}
-	return result
+	return s[:i+1]
 }
 
 func main() {
