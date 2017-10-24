@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"gopl/ch4/github"
+	"time"
 )
 
 func main() {
@@ -14,7 +15,26 @@ func main() {
 	}
 	fmt.Printf("%d issues:\n", result.TotalCount)
 
+	now := time.Now()
+
+	fmt.Println("1ヶ月未満")
 	for _, item := range result.Items {
-		fmt.Printf("#%-5d %9.9s %.55s\n", item.Number, item.User.Login, item.Title)
+		if now.Sub(item.CreatedAt).Hours()/24 <= 30 {
+			fmt.Printf("#%-5d %9.9s %.55s\n", item.Number, item.User.Login, item.Title)
+		}
+	}
+
+	fmt.Println("1年未満")
+	for _, item := range result.Items {
+		if now.Sub(item.CreatedAt).Hours()/24 <= 365 {
+			fmt.Printf("#%-5d %9.9s %.55s\n", item.Number, item.User.Login, item.Title)
+		}
+	}
+
+	fmt.Println("1年以上")
+	for _, item := range result.Items {
+		if now.Sub(item.CreatedAt).Hours()/24 > 365 {
+			fmt.Printf("#%-5d %9.9s %.55s\n", item.Number, item.User.Login, item.Title)
+		}
 	}
 }
