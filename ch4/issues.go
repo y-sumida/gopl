@@ -28,7 +28,7 @@ func main() {
 
 	fmt.Printf("\n%s 以後\n", yearAgo.Format("2006-01-02"))
 	for _, item := range result.Items {
-		if item.CreatedAt.After(yearAgo) {
+		if item.CreatedAt.After(yearAgo) && item.CreatedAt.Before(monthAgo) {
 			fmt.Printf("#%-5d %9.9s %.55s %s\n", item.Number, item.User.Login, item.Title, item.CreatedAt)
 		}
 	}
